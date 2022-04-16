@@ -1,33 +1,28 @@
 import AnimalCard from "../AnimalCard/AnimalCard";
 import "./App.css";
-import data from "./../../utils/data";
 import "./../AnimalCard/AnimalCard.css";
-
-function showAdditional(additional) {
-    const alertInfo = Object.entries(additional)
-        .map((info) => `${info[0]}: ${info[0]}`)
-        .join("\n");
-
-    alert(alertInfo);
-}
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import Hello from "../Hello/Hello";
+import Plant from "../Plant/Plant";
+import Nav from "../Nav/Nav";
 
 function App() {
     return (
-        <div className="wrapper">
-            <h1>Animals</h1>
-            {data.map((animal) => {
-                return (
-                    <AnimalCard
-                        key={animal.name}
-                        name={animal.name}
-                        additional={animal.additional}
-                        diet={animal.diet}
-                        scientificName={animal.scientificName}
-                        size={animal.size}
-                        showAdditional={showAdditional}
-                    />
-                );
-            })}
+        <div>
+            <BrowserRouter>
+                <Nav />
+                <Switch>
+                    <Route exact path="/">
+                        <Hello />
+                    </Route>
+                    <Route path="/animal">
+                        <AnimalCard />
+                    </Route>
+                    <Route path="/plant">
+                        <Plant />
+                    </Route>
+                </Switch>
+            </BrowserRouter>
         </div>
     );
 }
